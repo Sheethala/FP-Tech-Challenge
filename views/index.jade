@@ -23,17 +23,17 @@ html.
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label class="label-text">Style Code</label>
-						<input type="text" class="form-control" ng-model="style_code">
+						<input type="text" class="form-control uppercase-text" ng-model="style_code">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="label-text">Apparel Color</label>
-						<input type="text" class="form-control" ng-model="style_color">
+						<input type="text" class="form-control uppercase-text" ng-model="style_color">
 					</div>
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group col-sm-6">
 						<label class="label-text">Apparel Size</label>
-						<input type="text" class="form-control" ng-model="style_size">
+						<input type="text" class="form-control uppercase-text" ng-model="style_size">
 					</div>
 					<div class="form-group col-sm-6">
 						<label class="label-text">Quantity</label>
@@ -46,8 +46,14 @@ html.
 				<button type="button" class="btn btn-primary button-size" ng-click="getQuote()">Get Quote!</button>
 			</div>
 			</div>
-				<h2>The final Price is {{finalPrice}}</h2>
-				<h3>The price per item is {{itemPrice}}</h3>
+			<div class="row price-container">
+				<div class="col-sm-12 price-wrapper">
+				<div class="alert alert-info alert-box" role="alert">
+					<h2 class="label-text">Total Price: ${{finalPrice.toFixed(2)}}</h2>
+					<h2 class="label-text">Price per item: ${{itemPrice.toFixed(2)}}</h2>
+			</div>
+		</div>
+			</div>
 		</div>
 			<!-- INSERT HTML CODE HERE -->
 			<script src="js/lib/angular/angular.js"></script>

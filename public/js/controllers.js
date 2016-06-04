@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 
 /* Controller */
 angular.module('myApp.controllers', []).
@@ -24,9 +24,16 @@ angular.module('myApp.controllers', []).
 			}
 		}
 
+		$scope.validValue = function(value){
+			if(value === undefined || value === ""){
+				return false;
+			}
+			return true;
+		}
+
 		$scope.getQuote = function(){
 			var apparel_data;
-			var url = '/api/apparel/' + $scope.style_code;
+			var url;
 			var color_data;
 			var size_data;
 			var color;
@@ -34,21 +41,29 @@ angular.module('myApp.controllers', []).
 			var quote_object;
 			var weight;
 			console.log($scope.style_code);
-			$http.get(url).then(function(apparel, status) {
-				apparel_data = apparel.data;
-				if(apparel_data.length === 0){
-					swal("Oops", "Please check your values and try again", "error");
-				}
-				console.log(apparel.data);
-				color_data = $scope.splitStrings(apparel_data[0].color_codes);
-				color = $scope.getSizeColorCode(color_data, $scope.style_color);
-				size_data = $scope.splitStrings(apparel_data[0].size_codes);
-				size = $scope.getSizeColorCode(size_data, $scope.style_size);
-				weight = apparel_data[0].weight;
-				quote_object = {style_code: $scope.style_code, color_code: color, size_code: size };
-				$scope.sendData(quote_object, weight);
-				console.log(status);
-			});
+			if(!$scope.validValue($scope.style_color) || !$scope.validValue($scope.style_code)|| !$scope.validValue($scope.style_size) || !$scope.validValue($scope.quantity)){
+				swal("Oops", "Please make sure all fields are filled", "error");
+			}
+			else{
+				url = '/api/apparel/' + $scope.style_code.toUpperCase();
+				$http.get(url).then(function(apparel, status) {
+					apparel_data = apparel.data;
+					if(apparel_data.length === 0){
+						swal("Oops", "Please check your values and try again", "error");
+					}
+					else{
+						console.log(apparel.data);
+						color_data = $scope.splitStrings(apparel_data[0].color_codes);
+						color = $scope.getSizeColorCode(color_data, $scope.style_color.toUpperCase());
+						size_data = $scope.splitStrings(apparel_data[0].size_codes);
+						size = $scope.getSizeColorCode(size_data, $scope.style_size.toUpperCase());
+						weight = apparel_data[0].weight;
+						quote_object = {style_code: $scope.style_code, color_code: color, size_code: size };
+						$scope.sendData(quote_object, weight);
+						console.log(status);
+					}
+				});
+			}
 			console.log("THE QUOTE OBJECT IS")
 			console.log(quote_object);
 		}

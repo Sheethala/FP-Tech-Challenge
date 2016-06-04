@@ -17,8 +17,27 @@
   font-weight: 300;
 }
 
+.price-wrapper{
+  padding-top: 20px;
+}
+
+.price-container{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.alert-box{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  text-align: center;
+}
+
 .button-align{
   text-align: center;
+}
+
+.uppercase-text{
+  text-transform: uppercase;
 }
 
 .button-size{
