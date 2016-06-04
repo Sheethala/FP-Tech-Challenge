@@ -3,3 +3,31 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.wrapper-div{
+  text-align: center;
+}
+
+.heading-font{
+  font-weight: 200;
+  text-align: center;
+}
+
+.label-text{
+  font-weight: 300;
+}
+
+.button-align{
+  text-align: center;
+}
+
+.button-size{
+  font-size: 17px !important;
+}
+.heading-image{
+  width: 107px;
+  height: 75px;
+  background-image: url('https://www.freshprintsshop.com/assets/images/logo.svg');
+  background-position: left 0px;
+  display: inline-block;
+}
