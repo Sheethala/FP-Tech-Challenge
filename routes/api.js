@@ -25,10 +25,9 @@ api.get('/api/apparel/:styleCode?', function(req, res) {
 
 // API endpoint for /api/quote
 api.post('/api/quote', function(req, res) {
-  console.log("in the function");
-  console.log(req.body);
+  //console.log("in the function");
+  //console.log(req.body);
   var myfr = getApparelPrice(req.body.style_code, req.body.color_code, req.body.size_code).then(function(result){
-    console.log(result);
     res.send(result);
   });
 });
@@ -38,17 +37,14 @@ var getApparelPrice = function getPrice(style_code, color_code, size_code) {
 	var apparelPriceDeferred = q.defer();
 	// Format the Inventory API endpoint as explained in the documentation
   var url = "https://www.alphashirt.com/cgi-bin/online/xml/inv-request.w?sr="+style_code+"&cc="+color_code+"&sc="+size_code+"&pr=y&zp=10002&userName=triggered1111&password=triggered2222";
-  console.log(url);
+  //console.log(url);
 	https.get(url, function(res) {
 		res.on('data', function (data) {
 			// Parse response XML data here
       var parsed_data = data.toString();
-      console.log("The parsed data is >>>>>>>>>>>");
-      console.log(parsed_data);
       var price_index = parsed_data.indexOf("price") + 8;
-      console.log(price_index);
+    //  console.log(price_index);
       var last_price_index = parsed_data.indexOf('"', price_index);
-      console.log(last_price_index);
       var price = parsed_data.substring(price_index, last_price_index);
       apparelPriceDeferred.resolve(price);
       //Creates multiple requests without this line.

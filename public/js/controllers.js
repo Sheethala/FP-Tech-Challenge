@@ -6,7 +6,7 @@ angular.module('myApp.controllers', []).
 		// Insert controller code here
 		$scope.finalPrice = 0;
 		$scope.itemPrice = 0
-		console.log("calling the controller here");
+		//console.log("calling the controller here");
 
 		$scope.splitStrings = function(Arr){
 				return Arr.split(';');
@@ -111,15 +111,13 @@ angular.module('myApp.controllers', []).
 				}
 				$scope.finalPrice = final_price;
 				$scope.itemPrice = final_price/quantity;
-				console.log(final_price);
 		}
 
 		$scope.sendData = function(obj, weight){
-			console.log("INSIDE THE SENDDATA FN");
 			$http.post('/api/quote', obj).then(function(price, status){
-				console.log("THE PRICE IS");
-				console.log(price.data);
-				console.log(typeof(price.data));
+				//console.log("THE PRICE IS");
+				//console.log(price.data);
+				//console.log(typeof(price.data));
 				$scope.calculatePrice(Number(price.data), weight, Number($scope.quantity));
 			});
 		}
