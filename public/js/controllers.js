@@ -4,7 +4,6 @@
 angular.module('myApp.controllers', []).
 	controller('AppCtrl', function ($scope, $http) {
 		// Insert controller code here
-		$scope.test = "Hello";
 		$scope.finalPrice = 0;
 		$scope.itemPrice = 0
 		console.log("calling the controller here");
@@ -31,6 +30,11 @@ angular.module('myApp.controllers', []).
 			return true;
 		}
 
+		$scope.resetValue = function(){
+			$scope.finalPrice = 0;
+			$scope.itemPrice = 0;
+		}
+
 		$scope.getQuote = function(){
 			var apparel_data;
 			var url;
@@ -41,15 +45,24 @@ angular.module('myApp.controllers', []).
 			var quote_object;
 			var weight;
 			console.log($scope.style_code);
-			if(!$scope.validValue($scope.style_color) || !$scope.validValue($scope.style_code)|| !$scope.validValue($scope.style_size) || !$scope.validValue($scope.quantity)){
+			if(!$scope.validValue($scope.style_color) ||
+			!$scope.validValue($scope.style_code)||
+			!$scope.validValue($scope.style_size) ||
+			!$scope.validValue($scope.quantity)){
 				swal("Oops", "Please make sure all fields are filled", "error");
+				$scope.resetValue();
+			}
+			else if(!parseInt($scope.quantity)){
+				swal("Oops", "Quantity must be a number", "error");
+				$scope.resetValue();
 			}
 			else{
 				url = '/api/apparel/' + $scope.style_code.toUpperCase();
 				$http.get(url).then(function(apparel, status) {
 					apparel_data = apparel.data;
 					if(apparel_data.length === 0){
-						swal("Oops", "Please check your values and try again", "error");
+						swal("Oops", "This apparel doesn't exist", "error");
+						$scope.resetValue();
 					}
 					else{
 						console.log(apparel.data);
