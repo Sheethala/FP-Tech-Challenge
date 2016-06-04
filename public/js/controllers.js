@@ -44,7 +44,7 @@ angular.module('myApp.controllers', []).
 			var size;
 			var quote_object;
 			var weight;
-			console.log($scope.style_code);
+			//console.log($scope.style_code);
 			if(!$scope.validValue($scope.style_color) ||
 			!$scope.validValue($scope.style_code)||
 			!$scope.validValue($scope.style_size) ||
@@ -65,7 +65,7 @@ angular.module('myApp.controllers', []).
 						$scope.resetValue();
 					}
 					else{
-						console.log(apparel.data);
+						//console.log(apparel.data);
 						color_data = $scope.splitStrings(apparel_data[0].color_codes);
 						color = $scope.getSizeColorCode(color_data, $scope.style_color.toUpperCase());
 						size_data = $scope.splitStrings(apparel_data[0].size_codes);
@@ -73,17 +73,17 @@ angular.module('myApp.controllers', []).
 						weight = apparel_data[0].weight;
 						quote_object = {style_code: $scope.style_code, color_code: color, size_code: size };
 						$scope.sendData(quote_object, weight);
-						console.log(status);
+						//console.log(status);
 					}
 				});
 			}
-			console.log("THE QUOTE OBJECT IS")
-			console.log(quote_object);
+			//console.log("THE QUOTE OBJECT IS")
+			//console.log(quote_object);
 		}
 
 		$scope.calculatePrice = function(price, weight, quantity){
 				var final_price;
-				console.log(price, weight, quantity);
+				//console.log(price, weight, quantity);
 				if(weight <= 0.4){
 					if(quantity < 48){
 						final_price = (price * quantity) + quantity;
